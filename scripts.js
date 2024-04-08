@@ -2,9 +2,15 @@ document.addEventListener("DOMContentLoaded", showCards);
 
 
 const cardContainer = document.getElementById("card-container");
-const morePopup = document.getElementById('popup');
-const morePopupContent = document.getElementById('popup-content')
-const morePopupClose = document.getElementById('close');
+const morePopup = document.getElementById("more-popup");
+const morePopupContent = morePopup.querySelector('.popup-content')
+const morePopupClose = morePopupContent.querySelector(".close");
+
+const editPopup = document.getElementById('edit-popup');
+const editPopupContent = editPopup.querySelector('.popup-content');
+const editPopupClose = editPopupContent.querySelector('.close');
+const editSubmitEditBtn = editPopupContent.querySelector('#submitEdit');
+
 
 morePopupClose.addEventListener('click', () => {
     const paragraphTags = morePopupContent.querySelectorAll("p");
@@ -14,14 +20,17 @@ morePopupClose.addEventListener('click', () => {
     paragraphTags[3].innerHTML = "Metacritic Score: "; 
     paragraphTags[4].innerHTML = "Publisher: "; 
     paragraphTags[5].innerHTML = "Developer: "; 
-    paragraphTags[6].innerHTML = "Date of Release";
-    
-
-    console.log(paragraphTags);
+    paragraphTags[6].innerHTML = "Date of Release: ";
 
     morePopup.style.display = 'none';
 });
 
+editPopupClose.addEventListener('click', () => {
+    editPopup.style.display = 'none';
+});
+
+editPopupClose.addEventListener('click', () => {close()});
+editSubmitEditBtn.addEventListener('click', () => {edit(currEditCardID)});
 
 // This function adds cards the page to display the data in the array
 function showCards() {
@@ -29,7 +38,7 @@ function showCards() {
     cardContainer.innerHTML = "";
     const templateCard = document.querySelector(".card");
     
-    for (let i = 0; i < titles.length; i++) {
+    for(let i = 0; i < titles.length; i++){
         let title = titles[i];
 
         const nextCard = templateCard.cloneNode(true); // Copy the template card
@@ -47,13 +56,15 @@ function editCardContent(card, newTitle, cardId) {
     const cardHeader = card.querySelector("h2");
     cardHeader.textContent = newTitle.title;
 
-    const removeButton = card.getElementsByClassName("removeBtn")[0];
-    console.log(removeButton);
-    removeButton.addEventListener('click', () => {console.log("AAA"); removeElement(cardId)});
-
-    const moreButton = card.getElementsByClassName("moreBtn")[0];
-    console.log(moreButton); 
+    
+    const moreButton = card.querySelector(".moreBtn");
     moreButton.addEventListener('click', () => {showMore(cardId)});
+
+    const editButton = card.querySelector(".editBtn");
+    editButton.addEventListener('click', () => {openEditPopup(cardId)});
+
+    const removeButton = card.querySelector(".removeBtn");
+    removeButton.addEventListener('click', () => {removeElement(cardId)});
 
 
     //Assign the source for the image
@@ -67,7 +78,9 @@ function editCardContent(card, newTitle, cardId) {
 
     for(let i = 0; i < newTitle.genres.length; i++){
         paragraphTags[1].innerHTML += newTitle.genres[i];
-        if(i + 1 < newTitle.genres.length) paragraphTags[i].innerHTML += ", ";
+        if(i + 1 < newTitle.genres.length) {
+            paragraphTags[1].innerHTML += ", ";
+        }
     }
 
     for(let i = 0; i < newTitle.platforms.length; i++){
@@ -86,8 +99,9 @@ function removeLastCard() {
     showCards(); // Call showCards again to refresh
 }
 
-function removeSelectedCards(){
+function removeSelectedCards(id){
     let tempTitlesArr = [];
+    let tempIdArr = [];
     for(let i = 0; i < cardContainer.children.length; i++){
         let currChild = cardContainer.children[i];
         const checkbox = currChild.querySelector("input[type='checkbox']");
@@ -95,10 +109,12 @@ function removeSelectedCards(){
 
         if(!checkbox.checked){
             tempTitlesArr.push(titles[i]);
+            tempIdArr.push(i);
         }
     }
 
     titles = tempTitlesArr;
+    filteredCardsIdArr = tempIdArr;
     showCards();
 }
 
@@ -146,16 +162,33 @@ function swapInTitles(index1, index2){
 
 function removeElement(titleId){
     console.log("Remove called");
+    
     let i = titleId;
     while(i < titles.length-1){
         titles[i] = titles[i + 1];
         i++;
     }
+    // filteredCardsIdArr = filteredCardsIdArr.filter(id => id !== titleId);
     removeLastCard();
+}
+
+function removeId(id){
+    let idFound = false;
+    for(let i = 0; i < filteredCardsIdArr.length-1; i++){
+        if(!idFound && filteredCardsIdArr[i] == id){
+            idFound = true;
+        }
+        if(idFound){
+            filteredCardsIdArr[i] = filteredCardsIdArr[i + 1];
+        }
+    }
+    console.log(filteredCardsIdArr);
+    filteredCardsIdArr.pop();
 }
 
 
 function showMore(cardId){
+    console.log(cardId);
     morePopup.style.display = 'block';
     
     let title = titles[cardId];
@@ -163,7 +196,7 @@ function showMore(cardId){
     const h3 = morePopupContent.querySelector("h3").innerHTML = title["title"];
 
     morePopupContent.querySelector('img').src = title.imagePath;
-    const paragraphTags = morePopup.querySelectorAll("p");
+    const paragraphTags = morePopupContent.querySelectorAll("p");
 
     paragraphTags[0].innerHTML += "$" + title["price"];
     for(let i = 0; i < title.genres.length; i++){
@@ -181,4 +214,57 @@ function showMore(cardId){
     paragraphTags[5].innerHTML += title["developer"];
     paragraphTags[6].innerHTML += title["releaseDate"];
 
+}
+
+function openEditPopup(cardId){
+    currEditCardID = cardId;
+    editPopup.style.display = 'block';
+    let card = titles[cardId];
+
+    for(const key in card){
+        if(card.hasOwnProperty(key) && key != 'imagePath'){
+            console.log(key);
+            let input = editPopupContent.querySelector('#' + key);
+            input.value = card[key];
+        }
+    }
+}
+
+function edit(cardId){
+    console.log('edit');
+    let card = titles[cardId];
+    console.log(card);
+    for(const key in card){
+        console.log(1);
+        if(card.hasOwnProperty(key) && key != 'imagePath'){
+            let input = editPopupContent.querySelector('#' + key);
+
+            if(key == 'genres' || key == 'platforms'){
+                card[key] = input.value.split(", ");
+            }
+            else{
+                card[key] = input.value;
+            }
+        }
+    }
+    close();
+}
+
+function close(){
+    currEditCardID = -1;
+    editPopup.style.display = 'none';
+    showCards();
+}
+
+
+function filter(minPrice = 0, maxPrice = 1000, genre = "", platform = "", minMetacriticScore = 0, minReleaseDate="01/01/01", publisher = "", developer = ""){
+    let tempIdArr = [];
+
+    for(let i = 0; i < titles.length; i++){
+        let title = titles[i];
+        if(title.price >= minPrice && title.price < maxPrice && contains(title.genres, genre) && contains(title.platforms, platform) && title.metacriticScore >= minMetacriticScore && title.publisher == publisher && title.developer == developer){
+            tempIdArr.push(i);
+        }
+    }
+    filteredCardsIdArr = tempIdArr;
 }

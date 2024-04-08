@@ -69,7 +69,7 @@ button {
     margin: 5px;
 }
 
-#popup{
+.popup{
     display: none;
     position: fixed;
     top: 0;
@@ -80,17 +80,17 @@ button {
     z-index: 9999;
 }
 
-#close{
+.close{
     position: absolute; 
     top: 10px; 
     right: 10px; 
     cursor: pointer;
 }
 
-#popup-content {
+.popup-content {
     font-family: Verdana;
     background-color: #fff;
-    width: 300px;
+    width: 350px;
     padding: 20px;
     border-radius: 10px;
     position: absolute;
@@ -99,7 +99,12 @@ button {
     transform: translate(-50%, -50%);
 }
 
-#image{
+.popup-image{
     height: 100%; 
+    width: 100%;
+}
+
+input{
+    display: block;
     width: 100%;
 }

@@ -2,11 +2,11 @@
 <html>
 
 <head>
-    <title>LA TV Shows | Home</title>
-    <meta name="description" content="A Catalog of Shows Set in Los Angeles">
+    <title>Arman's Favourite Games | Home</title>
+    <meta name="description" content="A Catalog of  Arman's Favourite Games">
     <link rel="stylesheet" href="style.css" />
-    <script type="text/javascript" src="scripts.js" defer></script>
     <script type="text/javascript" src="titles.js" defer></script>
+    <script type="text/javascript" src="scripts.js" defer></script>
 </head>
 
 <body>
@@ -15,14 +15,16 @@
         <h3 class="title">Arman's Favourite Games</h1>
     </header>
 
+
+    
     <button onclick="removeLastCard();">
         Remove The Last Card
     </button>
-
+    
     <button onclick="removeSelectedCards()">
         Remove Selected Cards
     </button>
-
+    
     <button onclick="sort('price', true)">
         Sort by Price Lowest First
     </button>
@@ -30,13 +32,12 @@
     <button onclick="sort('price', false)">
         Sort by Price Highest First
     </button>
-
     
-
+        
     <div id="card-container">
-
+        
     </div>
-
+    
 
     <div class="card" style="display: none;">
         <input type="checkbox">
@@ -48,28 +49,67 @@
             <p>Platforms:</p>
         </div>
         <button class="moreBtn">More...</button>
-        <button>Edit</button>
+        <button class="editBtn">Edit</button>
         <button class="removeBtn">Remove</button>
     </div>
 
 
-    <div id="more-popup">
-        <div id="popup" class="popup">
-            <div id="popup-content">
-                <span class="close" id="close">&times</span>
-                <h3>Title</h3>
-                <img id="image" src="./images/god-of-war.jpg">
-                <p>Price: </p>
-                <p>Genres: </p>
-                <p>Platforms: </p>
-                <p>Metacritic Score: </p>
-                <p>Publisher: </p>
-                <p>Developer: </p>
-                <p>Date of Release: </p>
-            </div>
 
+    <div id="more-popup" class="popup">
+        <div class="popup-content">
+            <span class="close">&times</span>
+            <h3>Title</h3>
+            <img class="popup-image" src="./images/god-of-war.jpg">
+            <p>Price: </p>
+            <p>Genres: </p>
+            <p>Platforms: </p>
+            <p>Metacritic Score: </p>
+            <p>Publisher: </p>
+            <p>Developer: </p>
+            <p>Date of Release: </p>
         </div>
     </div>
+
+    <div id="edit-popup" class="popup">
+        <div class="popup-content">
+            <span class="close">&times</span>
+            <h3>Edit</h3>
+            
+            <label>Title </label>
+            <input type="text" id="title" value=" ">
+            <br>
+            
+            <label>Price </label>
+            <input type="text" id="price" value=" ">
+            <br>
+            
+            <label>Genres: </label>
+            <input type="text" id="genres">
+            <br>
+
+            <label>Platforms: </label>
+            <input type="text" id="platforms">
+            <br>
+
+            <label>Metacritic Score: </label>
+            <input type="text" id="metacriticScore">
+            <br>
+
+            <label>Publisher: </label>
+            <input type="text" id="publisher">
+            <br>
+
+            <label>Developer: </label>
+            <input type="text" id="developer">
+            <br>
+
+            <label>Release Date: </label>
+            <input type="text" id="releaseDate">
+
+            <button id="submitEdit">Submit Edit</button>
+        </div>
+    </div>
+
 
 </body>
 
