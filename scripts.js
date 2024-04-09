@@ -11,6 +11,10 @@ const editPopupContent = editPopup.querySelector('.popup-content');
 const editPopupClose = editPopupContent.querySelector('.close');
 const editSubmitEditBtn = editPopupContent.querySelector('#submitEdit');
 
+let filteredCardsArr = titles;
+
+
+
 
 morePopupClose.addEventListener('click', () => {
     const paragraphTags = morePopupContent.querySelectorAll("p");
@@ -38,8 +42,8 @@ function showCards() {
     cardContainer.innerHTML = "";
     const templateCard = document.querySelector(".card");
     
-    for(let i = 0; i < titles.length; i++){
-        let title = titles[i];
+    for(let i = 0; i < filteredCardsArr.length; i++){
+        let title = filteredCardsArr[i];
 
         const nextCard = templateCard.cloneNode(true); // Copy the template card
         editCardContent(nextCard, title, i); // Edit title and image
@@ -95,38 +99,43 @@ function editCardContent(card, newTitle, cardId) {
 // This calls the addCards() function when the page is first loaded
 
 function removeLastCard() {
-    titles.pop(); // Remove last item in titles array
+    
+    // titles.pop(); // Remove last item in titles array
+    let elem = filteredCardsArr.pop();
+    removeFromTitles([elem]);
     showCards(); // Call showCards again to refresh
 }
 
 function removeSelectedCards(id){
-    let tempTitlesArr = [];
-    let tempIdArr = [];
+    let tempFilteredTitlesArr = [];
+    let deletedCards = [];
     for(let i = 0; i < cardContainer.children.length; i++){
         let currChild = cardContainer.children[i];
         const checkbox = currChild.querySelector("input[type='checkbox']");
         console.log(checkbox);
 
         if(!checkbox.checked){
-            tempTitlesArr.push(titles[i]);
-            tempIdArr.push(i);
+            tempFilteredTitlesArr.push(filteredCardsArr[i]);
+        }else{
+            deletedCards.push(filteredCardsArr[i]);
         }
+        
     }
 
-    titles = tempTitlesArr;
-    filteredCardsIdArr = tempIdArr;
+    removeFromTitles(deletedCards);
+    filteredCardsArr = tempFilteredTitlesArr;
     showCards();
 }
 
 function sort(sortBy, lowestFirst){
     console.log(lowestFirst);
-    for(let i = 0; i < titles.length; i++){
+    for(let i = 0; i < filteredCardsArr.length; i++){
         let extreme = i; //The index of either min or max element in titles that comes after i
-        for(let j = i + 1; j < titles.length; j++){
+        for(let j = i + 1; j < filteredCardsArr.length; j++){
             if(lowestFirst){
-                if(titles[extreme][sortBy] > titles[j][sortBy]) extreme = j;
+                if(filteredCardsArr[extreme][sortBy] > filteredCardsArr[j][sortBy]) extreme = j;
             }else{
-                if(titles[extreme][sortBy] < titles[j][sortBy]) extreme = j;
+                if(filteredCardsArr[extreme][sortBy] < filteredCardsArr[j][sortBy]) extreme = j;
             }
         }
         swapInTitles(i, extreme);
@@ -154,22 +163,25 @@ function filter(filterBy, filterValue, isMoreID = 0){
 }
 
 function swapInTitles(index1, index2){
-    let temp = titles[index1];
-    titles[index1] = titles[index2];
-    titles[index2] = temp;
+    let temp = filteredCardsArr[index1];
+    filteredCardsArr[index1] = filteredCardsArr[index2];
+    filteredCardsArr[index2] = temp;
 }
 
 
 function removeElement(titleId){
-    console.log("Remove called");
-    
-    let i = titleId;
-    while(i < titles.length-1){
-        titles[i] = titles[i + 1];
-        i++;
+    console.log("Remove at " + titleId);
+    let temp = [];
+    for(let i = 0; i < filteredCardsArr.length; i++){
+        if(i == titleId){
+            removeFromTitles([filteredCardsArr[titleId]]);
+        }else{
+            temp.push(filteredCardsArr[i]);
+        }
     }
-    // filteredCardsIdArr = filteredCardsIdArr.filter(id => id !== titleId);
-    removeLastCard();
+
+    filteredCardsArr = temp;
+    showCards();
 }
 
 function removeId(id){
@@ -267,4 +279,23 @@ function filter(minPrice = 0, maxPrice = 1000, genre = "", platform = "", minMet
         }
     }
     filteredCardsIdArr = tempIdArr;
+}
+
+function filterByPrice(){
+    const minPriceInput = document.getElementById("minPrice");
+    const maxPriceInput = document.getElementById("maxPrice");
+    let temp = [];
+    for(let i = 0; i < titles.length; i++){
+        let title = titles[i];
+        console.log(title);
+        let price = title["price"];
+        console.log(price, minPriceInput.value, maxPriceInput.value);
+        if(price >= minPriceInput.value && price <= maxPriceInput.value){
+            temp.push(title);
+        }
+    }
+    console.log(temp);
+    filteredCardsArr = temp;
+    console.log(filteredCardsArr);
+    showCards();
 }

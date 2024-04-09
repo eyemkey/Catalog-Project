@@ -8,3 +8,18 @@ let titles = [
 
 
 
+function removeFromTitles(cards){
+    let k = 0; 
+    let tempTitles = [];
+    for(let i = 0; i < titles.length; i++){
+        if(titles[i] != cards[k]){
+            tempTitles.push(titles[i]);
+        }else{
+            k++;
+        }
+    }
+
+    titles = tempTitles;
+}
+
+
