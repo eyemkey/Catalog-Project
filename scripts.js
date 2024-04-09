@@ -11,8 +11,7 @@ const editPopupContent = editPopup.querySelector('.popup-content');
 const editPopupClose = editPopupContent.querySelector('.close');
 const editSubmitEditBtn = editPopupContent.querySelector('#submitEdit');
 
-let filteredCardsArr = titles;
-
+let filteredCardsArr = [...titles];
 
 
 
@@ -127,21 +126,7 @@ function removeSelectedCards(id){
     showCards();
 }
 
-function sort(sortBy, lowestFirst){
-    console.log(lowestFirst);
-    for(let i = 0; i < filteredCardsArr.length; i++){
-        let extreme = i; //The index of either min or max element in titles that comes after i
-        for(let j = i + 1; j < filteredCardsArr.length; j++){
-            if(lowestFirst){
-                if(filteredCardsArr[extreme][sortBy] > filteredCardsArr[j][sortBy]) extreme = j;
-            }else{
-                if(filteredCardsArr[extreme][sortBy] < filteredCardsArr[j][sortBy]) extreme = j;
-            }
-        }
-        swapInTitles(i, extreme);
-    }
-    showCards();
-}
+
 
 function filter(filterBy, filterValue, isMoreID = 0){
     let tempArr = [];
@@ -162,11 +147,7 @@ function filter(filterBy, filterValue, isMoreID = 0){
     showCards();
 }
 
-function swapInTitles(index1, index2){
-    let temp = filteredCardsArr[index1];
-    filteredCardsArr[index1] = filteredCardsArr[index2];
-    filteredCardsArr[index2] = temp;
-}
+
 
 
 function removeElement(titleId){
@@ -203,7 +184,7 @@ function showMore(cardId){
     console.log(cardId);
     morePopup.style.display = 'block';
     
-    let title = titles[cardId];
+    let title = filteredCardsArr[cardId];
     
     const h3 = morePopupContent.querySelector("h3").innerHTML = title["title"];
 
@@ -221,10 +202,10 @@ function showMore(cardId){
         if(i + 1 < title.platforms.length) paragraphTags[2].innerHTML += ", ";
     }
 
-    paragraphTags[3].innerHTML += title["metacriticScore"];
-    paragraphTags[4].innerHTML += title["publisher"];
-    paragraphTags[5].innerHTML += title["developer"];
-    paragraphTags[6].innerHTML += title["releaseDate"];
+    paragraphTags[3].innerHTML += title.metacriticScore;
+    paragraphTags[4].innerHTML += title.publisher;
+    paragraphTags[5].innerHTML += title.developer;
+    paragraphTags[6].innerHTML += title.releaseDate.toLocaleDateString();
 
 }
 
@@ -269,17 +250,33 @@ function close(){
 }
 
 
-function filter(minPrice = 0, maxPrice = 1000, genre = "", platform = "", minMetacriticScore = 0, minReleaseDate="01/01/01", publisher = "", developer = ""){
-    let tempIdArr = [];
-
+function filter(){
+    filteredCardsArr.length = 0;
     for(let i = 0; i < titles.length; i++){
         let title = titles[i];
-        if(title.price >= minPrice && title.price < maxPrice && contains(title.genres, genre) && contains(title.platforms, platform) && title.metacriticScore >= minMetacriticScore && title.publisher == publisher && title.developer == developer){
-            tempIdArr.push(i);
+        let containsGenres = contains(activeGenres, title.genres);
+        let containsPlatforms = contains(activePlatforms, title.platforms);
+        let containsDeveloper = contains(activeDevelopers, [title.developer]);
+        if(containsGenres && containsPlatforms && containsDeveloper && title.metacriticScore >= minMetacriticScore){
+            if(noPriceBound || (title.price >= minPrice && title.price <= maxPrice)){
+                filteredCardsArr.push(title);
+            }
         }
     }
-    filteredCardsIdArr = tempIdArr;
+    callSort();
+    showCards();
 }
+
+function contains(searchArray, targetsArr){
+    if(searchArray.length == 0) return true;
+    for(let target of targetsArr){
+        for(let elem of searchArray){
+            if (elem == target) return true;
+        }
+    }
+    return false;
+}
+
 
 function filterByPrice(){
     const minPriceInput = document.getElementById("minPrice");

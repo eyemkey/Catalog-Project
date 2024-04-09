@@ -1,61 +1,111 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <title>Arman's Favourite Games | Home</title>
-    <meta name="description" content="A Catalog of  Arman's Favourite Games">
-    <link rel="stylesheet" href="style.css" />
-    <script type="text/javascript" src="titles.js" defer></script>
-    <script type="text/javascript" src="scripts.js" defer></script>
-</head>
-
-<body>
-
-    <header class="main-header">
-        <h3 class="title">Arman's Favourite Games</h1>
-    </header>
-
-
     
-    <button onclick="removeLastCard();">
-        Remove The Last Card
-    </button>
+    <head>
+        <title>Arman's Favourite Games | Home</title>
+        <meta name="description" content="A Catalog of  Arman's Favourite Games">
+        <link rel="stylesheet" href="style.css" />
+        <script type="text/javascript" src="titles.js" defer></script>
+        <script type="text/javascript" src="scripts.js" defer></script>
+        <script type="text/javascript" src="sortingHandler.js" defer></script>
+        <script type="text/javascript" src="dropdownHandler.js" defer></script>
+    </head>
     
-    <button onclick="removeSelectedCards()">
-        Remove Selected Cards
-    </button>
-    
-    <button onclick="sort('price', true)">
-        Sort by Price Lowest First
-    </button>
-    
-    <button onclick="sort('price', false)">
-        Sort by Price Highest First
-    </button>
-    
+    <body>
         
-    <button onclick="filterByPrice()">
-        Filter by Price
-    </button>
-    <input type="text" id="minPrice">
-    <input type="text" id="maxPrice">
+        <header class="main-header">
+            <h3 class="title">Arman's Favourite Games</h1>
+        </header>
+            
+        <div id="top-buttons">
+
+            
+            <button onclick="removeLastCard();">
+                Remove The Last Card
+            </button>
+            
+            <button onclick="removeSelectedCards()">
+                Remove Selected Cards
+            </button>   
+        </div>
 
 
-    <div id="card-container">
+
+        <div id="main">
+
+            <div id="left-section">
+                <div id="card-container">
+                    
+                </div>
+            </div>   
+
+            <div id="right-section">
+
+                <div id="sorting-dropdown" class="dropdown">
+                    <button class="dropdown-toggle">Sort</button>
+                    <div class="dropdown-menu">
+                        <label><input type="radio" name="sort-option" value="title-A-Z" checked>A-Z</label>
+                        <label><input type="radio" name="sort-option" value="title-Z-A">Z-A</label>
+                        <label><input type="radio" name="sort-option" value="price-asc">Price Low-High</label>
+                        <label><input type="radio" name="sort-option" value="price-desc">Price High-Low</label>
+                        <label><input type="radio" name="sort-option" value="metacriticScore-desc">Metacritic Score Descending</label>
+                        <label><input type="radio" name="sort-option" value="metacriticScore-asc">Metacritic Score Ascending</label>
+                        <label><input type="radio" name="sort-option" value="releaseDate-asc">Oldest First</label>
+                        <label><input type="radio" name="sort-option" value="releaseDate-desc">Newest First</label>
+                    </div>
+                </div>
+
+
+                    <div id="genres-dropdown" class="dropdown">
+                        <button class="dropdown-toggle">Genres</button>
+                        <div class="dropdown-menu">
+                            
+                        </div>
+                    </div>
+            
+                    <div id="platforms-dropdown" class="dropdown">
+                        <button class="dropdown-toggle">Platforms</button>
+                        <div class="dropdown-menu">
+                            
+                        </div>
+                    </div>
+
+                    <div id="price-dropdown" class="dropdown">
+                        <button class="dropdown-toggle">Price</button>
+                        <div class="dropdown-menu">
+                            <label>Min <input type="number" id="minPrice" value="0"></label>
+                            <label>Max <input type="number" id="maxPrice" value="0"></label>
+                        </div>
+                    </div>
+
+                    <div id="developer-dropdown" class="dropdown">
+                        <button class="dropdown-toggle">Developers</button>
+                        <div class="dropdown-menu">
+
+                        </div>
+                    </div>
+                    
+                    <div id="metacritic-dropdown" class="dropdown">
+                        <button class="dropdown-toggle">Metacritic Score</button>
+                        <div class="dropdown-menu">
+                            <input type="number" id="minMetacriticScore" value="0">
+                        </div>
+                    </div>
+                
+            </div>
+            
+        </div>
         
-    </div>
-    
-
-    <div class="card" style="display: none;">
-        <input type="checkbox">
+        <div class="card" style="display: none;">
+            <input type="checkbox">
         <div class="card-content">
             <h2>TV Show Title</h2>
-            <img src="" alt="TV Show Poster">
+            <img src="" class="card-img">
             <p>Price: </p>
             <p>Genres: </p>
             <p>Platforms:</p>
         </div>
-        <button class="moreBtn">More...</button>
+        <button class="moreBtn">More</button>
         <button class="editBtn">Edit</button>
         <button class="removeBtn">Remove</button>
     </div>

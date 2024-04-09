@@ -1,12 +1,25 @@
 html,
 body {
     margin: 0;
-    padding: 0;
+    padding: 0px;
 }
 
 .main-header {
-    background-color: rgba(0, 0, 0, .3);
+    /* background-color: rgba(0, 0, 0, .3);
+     */
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+     /* width: 100%; */
     padding-bottom: 10px;
+    margin: 0 0 20px 0;
+}
+
+#top-buttons{
+    padding-left: 50px;
+}
+
+#main{
+    display: flex;
+    justify-content: space-around;
 }
 
 .title {
@@ -15,21 +28,43 @@ body {
     font-size: 4em;
     font-family: "Helvetica";
     font-weight: normal;
-    color: white;
+    color: grey;
+    
 }
 
 #card-container {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* gap: 1%; */
     margin: 20px;
 }
 
+#right-section{
+    width: 310px;
+    padding: 20px;
+}
+
+#right-section button{
+    width: 100%;
+}
+#left-section {
+    margin: 0;
+    padding: 0;
+}
+
 .card {
+    /* display: flex;
+    align-items: end; */
+    padding: 20px;
+
     width: 300px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin: 5px;
+}
+
+.card .button {
+
 }
 
 .card-content {
@@ -38,31 +73,52 @@ body {
     color: #777;
 }
 
-.card-content h2 {
+.card-content h2{
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
     margin-top: 0;
     font-size: 20px;
 }
 
+.card-content p{
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
 .card img {
     width: 100%;
+    border-radius: 5px;
     height: auto;
 }
 
-.footer {
-    display: flex;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, .3);
-    padding: 10px;
+
+․card :hover {
+    background-color: #555   ;
+}
+
+
+.card button {
+    width: 100%;
+    background-color: #055C9D;
 }
 
 button {
+    min-width: 210px;
     text-align: center;
-    background-color: #666;
+    /* background-color: #666; */
+    background-color: #055C9D;
     border: none;
     padding-left: 10px;
     padding-right: 10px;
     height: 40px;
-    border-radius: 10px;
+    border-radius: 5px;
     color: white;
     font-size: 22px;
     cursor: pointer;
@@ -104,7 +160,83 @@ button {
     width: 100%;
 }
 
-input{
+/* input{
     display: block;
     width: 100%;
+} */
+
+
+.sorting-menu-container {
+    position: relative;
+  }
+  
+  .sorting-menu {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .toggle-button {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    cursor: pointer;
+  }
+  
+.dropdown-menu{
+    display: none; 
+    background-color: #fff;
+    /* border: 1px solid #ccc; */
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px; 
+}
+
+.dropdown-menu label{
+    display: block;
+    height: 40px;
+    font-family: Verdana;
+    font-size: large;
+}
+
+.dropdown-menu label:hover{
+    background-color: #f0f0f0;
+}
+
+.dropdown-menu label input[type="checkbox"] {
+    margin-right: 5px;
+    /* vertical-align: middle; */
+}
+
+.dropdown-menu.active{
+    display:block;
+}
+
+#price-dropdown label{
+    display: block;
+    margin-bottom: 5px;
+}
+
+#price-dropdown .dropdown-menu input {
+    border: 1px solid grey;
+    border-radius: 5px;
+    height: 20px;
+    width: 140px;
+    margin: 0 10px 0 0;
+}
+
+#filter-dropdown .dropdown-menu{
+    border: none;
+    box-shadow: none;
+    padding: 0px;
+}
+
+input[type='radio'], input[type='checkbox']{
+    width: 20px;
+    height: 20px;
 }
