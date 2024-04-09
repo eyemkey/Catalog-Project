@@ -212,27 +212,35 @@ function showMore(cardId){
 function openEditPopup(cardId){
     currEditCardID = cardId;
     editPopup.style.display = 'block';
-    let card = titles[cardId];
+    let card = filteredCardsArr[cardId];
 
     for(const key in card){
         if(card.hasOwnProperty(key) && key != 'imagePath'){
             console.log(key);
             let input = editPopupContent.querySelector('#' + key);
-            input.value = card[key];
+            if(key == "releaseDate"){
+                input.value = card[key].toLocaleDateString();
+            } 
+            else{
+                input.value = card[key];
+            }
         }
     }
 }
 
 function edit(cardId){
     console.log('edit');
-    let card = titles[cardId];
+    let card = filteredCardsArr[cardId];
     console.log(card);
     for(const key in card){
         console.log(1);
         if(card.hasOwnProperty(key) && key != 'imagePath'){
             let input = editPopupContent.querySelector('#' + key);
 
-            if(key == 'genres' || key == 'platforms'){
+            if(key == 'releaseDate'){
+                card[key] = convertToDate(input.value);
+            }
+            else if(key == 'genres' || key == 'platforms'){
                 card[key] = input.value.split(", ");
             }
             else{
@@ -241,6 +249,11 @@ function edit(cardId){
         }
     }
     close();
+}
+
+function convertToDate(str){
+    let arr = str.split('/');
+    return new Date(arr[2] + '-' + arr[0] + '-' + arr[1]);
 }
 
 function close(){
@@ -257,10 +270,10 @@ function filter(){
         let containsGenres = contains(activeGenres, title.genres);
         let containsPlatforms = contains(activePlatforms, title.platforms);
         let containsDeveloper = contains(activeDevelopers, [title.developer]);
-        if(containsGenres && containsPlatforms && containsDeveloper && title.metacriticScore >= minMetacriticScore){
-            if(noPriceBound || (title.price >= minPrice && title.price <= maxPrice)){
+        let inPriceRange = noPriceBound || (title.price >= minPrice && title.price <= maxPrice);
+        let inMetacriticScoreRange = noMetacriticScoreBound || (title.metacriticScore >= minMetacriticScore && title.metacriticScore <= maxMetacriticScore);
+        if(containsGenres && containsPlatforms && containsDeveloper && inPriceRange && inMetacriticScoreRange){
                 filteredCardsArr.push(title);
-            }
         }
     }
     callSort();
@@ -275,24 +288,4 @@ function contains(searchArray, targetsArr){
         }
     }
     return false;
-}
-
-
-function filterByPrice(){
-    const minPriceInput = document.getElementById("minPrice");
-    const maxPriceInput = document.getElementById("maxPrice");
-    let temp = [];
-    for(let i = 0; i < titles.length; i++){
-        let title = titles[i];
-        console.log(title);
-        let price = title["price"];
-        console.log(price, minPriceInput.value, maxPriceInput.value);
-        if(price >= minPriceInput.value && price <= maxPriceInput.value){
-            temp.push(title);
-        }
-    }
-    console.log(temp);
-    filteredCardsArr = temp;
-    console.log(filteredCardsArr);
-    showCards();
 }

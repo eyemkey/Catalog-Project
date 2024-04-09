@@ -28,8 +28,10 @@ let maxPrice = priceInputs[1].value;
 const metacriticDropdown = document.getElementById("metacritic-dropdown");
 const metacriticDropdownToggle = metacriticDropdown.querySelector(".dropdown-toggle");
 const metacriticDropdownMenu = metacriticDropdown.querySelector(".dropdown-menu");
-const metacriticInput = metacriticDropdownMenu.querySelector("input[type='number']");
+const metacriticInputs = metacriticDropdownMenu.querySelectorAll("input[type='number']");
+let noMetacriticScoreBound = true;
 let minMetacriticScore = 0;
+let maxMetacriticScore = 0;
 
 
 const developerDropdown = document.getElementById("developer-dropdown");
@@ -60,12 +62,6 @@ for(let i = 0; i < radioInputs.length; i++){
     });
 }
 
-
-metacriticInput.addEventListener('input', () => {
-    minMetacriticScore = metacriticInput.value;
-    filter();
-});
-
 for(let i = 0; i < priceInputs.length; i++){
     
     priceInputs[i].addEventListener('input', () => {
@@ -78,6 +74,16 @@ for(let i = 0; i < priceInputs.length; i++){
     })
 }
 
+
+for(let i = 0; i < metacriticInputs.length; i++){
+    metacriticInputs[i].addEventListener('input', () => {
+        minMetacriticScore = metacriticInputs[0].value;
+        maxMetacriticScore = metacriticInputs[1].value;
+        noMetacriticScoreBound = (minMetacriticScore == 0 && maxMetacriticScore == 0);
+
+        filter();
+    })
+}
 
 for(let i = 0; i < developerCheckboxes.length; i++){
     developerCheckboxes[i].addEventListener('change', () => {

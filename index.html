@@ -73,8 +73,15 @@
                     <div id="price-dropdown" class="dropdown">
                         <button class="dropdown-toggle">Price</button>
                         <div class="dropdown-menu">
-                            <label>Min <input type="number" id="minPrice" value="0"></label>
-                            <label>Max <input type="number" id="maxPrice" value="0"></label>
+                            <table>
+                                <tr>
+                                    <td>Min</td>
+                                    <td><input type="number" id="minPrice" class="price-input" value="0"></td>
+                                    <td>Max</td>
+                                    <td><input type="number" id="maxPrice" class="price-input" value="0"></td>
+                                </tr>
+                            </table>
+                            
                         </div>
                     </div>
 
@@ -88,7 +95,14 @@
                     <div id="metacritic-dropdown" class="dropdown">
                         <button class="dropdown-toggle">Metacritic Score</button>
                         <div class="dropdown-menu">
-                            <input type="number" id="minMetacriticScore" value="0">
+                            <table>
+                                <tr>
+                                    <td>Min</td>
+                                    <td><input type="number" id="minMetacriticScore" value="0"></td>
+                                    <td>Max</td>
+                                    <td><input type="number" id="maxMetacriticScore" value="0"></td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 
@@ -98,17 +112,17 @@
         
         <div class="card" style="display: none;">
             <input type="checkbox">
-        <div class="card-content">
-            <h2>TV Show Title</h2>
-            <img src="" class="card-img">
-            <p>Price: </p>
-            <p>Genres: </p>
-            <p>Platforms:</p>
+            <div class="card-content">
+                <h2>TV Show Title</h2>
+                <img src="" class="card-img">
+                <p>Price: </p>
+                <p>Genres: </p>
+                <p>Platforms:</p>
+            </div>
+            <button class="moreBtn">More</button>
+            <button class="editBtn">Edit</button>
+            <button class="removeBtn">Remove</button>
         </div>
-        <button class="moreBtn">More</button>
-        <button class="editBtn">Edit</button>
-        <button class="removeBtn">Remove</button>
-    </div>
 
 
 
@@ -130,38 +144,45 @@
     <div id="edit-popup" class="popup">
         <div class="popup-content">
             <span class="close">&times</span>
-            <h3>Edit</h3>
+            <center>
+                <h2>Edit</h2>
+            </center>
             
-            <label>Title </label>
-            <input type="text" id="title" value=" ">
-            <br>
             
-            <label>Price </label>
-            <input type="text" id="price" value=" ">
-            <br>
-            
-            <label>Genres: </label>
-            <input type="text" id="genres">
-            <br>
-
-            <label>Platforms: </label>
-            <input type="text" id="platforms">
-            <br>
-
-            <label>Metacritic Score: </label>
-            <input type="text" id="metacriticScore">
-            <br>
-
-            <label>Publisher: </label>
-            <input type="text" id="publisher">
-            <br>
-
-            <label>Developer: </label>
-            <input type="text" id="developer">
-            <br>
-
-            <label>Release Date: </label>
-            <input type="text" id="releaseDate">
+            <table>
+                <tr>
+                    <td><label>Title</label></td>
+                    <td><input type="text" id="title" value=" "></td>
+                </tr>
+                <tr>
+                    <td><label>Price</label></td>
+                    <td><input type="text" id="price" value=" "></td>
+                </tr>
+                <tr>
+                    <td><label>Genres</label></td>
+                    <td><input type="text" id="genres" value=" "></td>
+                </tr>
+                <tr>
+                    <td><label>Platforms</label></td>
+                    <td><input type="text" id="platforms" value=" "></td>
+                </tr>
+                <tr>
+                    <td><label>Metacritic Score</label></td>
+                    <td><input type="text" id="metacriticScore" value=" "></td>
+                </tr>
+                <tr>
+                    <td><label>Publisher</label></td>
+                    <td><input type="text" id="publisher" value=" "></td>
+                </tr>
+                <tr>
+                    <td><label>Developer</label></td>
+                    <td><input type="text" id="developer" value=" "></td>
+                </tr>
+                <tr>
+                    <td><label>Release Date</label></td>
+                    <td><input type="text" id="releaseDate" value=" "></td>
+                </tr>                
+            </table>
 
             <button id="submitEdit">Submit Edit</button>
         </div>

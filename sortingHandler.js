@@ -1,10 +1,3 @@
-const sortOptionsMenu = document.getElementById("sort-options")
-sort("title", true);
-
-
-sortOptionsMenu.addEventListener('change', () => {
-    callSort();
-})
 
 function callSort(){
 
