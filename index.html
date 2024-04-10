@@ -4,6 +4,9 @@
     <head>
         <title>Arman's Favourite Games | Home</title>
         <meta name="description" content="A Catalog of  Arman's Favourite Games">
+        <link rel="stylesheet" href="dropdown.css" />
+        <link rel="stylesheet" href="popup.css" />
+        <link rel="stylesheet" href="card.css" />
         <link rel="stylesheet" href="style.css" />
         <script type="text/javascript" src="titles.js" defer></script>
         <script type="text/javascript" src="scripts.js" defer></script>
@@ -27,6 +30,8 @@
             <button onclick="removeSelectedCards()">
                 Remove Selected Cards
             </button>   
+
+            <input type="text" id="searchBox" placeholder="Search">
         </div>
 
 
@@ -48,8 +53,8 @@
                         <label><input type="radio" name="sort-option" value="title-Z-A">Z-A</label>
                         <label><input type="radio" name="sort-option" value="price-asc">Price Low-High</label>
                         <label><input type="radio" name="sort-option" value="price-desc">Price High-Low</label>
-                        <label><input type="radio" name="sort-option" value="metacriticScore-desc">Metacritic Score Descending</label>
-                        <label><input type="radio" name="sort-option" value="metacriticScore-asc">Metacritic Score Ascending</label>
+                        <label><input type="radio" name="sort-option" value="metacriticScore-desc">Metacritic Score Low-High</label>
+                        <label><input type="radio" name="sort-option" value="metacriticScore-asc">Metacritic Score High-Low</label>
                         <label><input type="radio" name="sort-option" value="releaseDate-asc">Oldest First</label>
                         <label><input type="radio" name="sort-option" value="releaseDate-desc">Newest First</label>
                     </div>

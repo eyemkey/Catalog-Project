@@ -1,0 +1,38 @@
+.dropdown-menu{
+    display: none; 
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 10px; 
+}
+
+.dropdown-menu label{
+    display: block;
+    height: 3.5vh;
+    font-family: Verdana;
+    font-size: 1.5 * var(--main-font-size);
+}
+
+.dropdown-menu label:hover{
+    background-color: #f0f0f0;
+}
+
+.dropdown-menu label input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.dropdown-menu.active{
+    display:block;
+}
+
+.dropdown-menu input {
+    border: 1px solid grey;
+    border-radius: 5px;
+    height: 3vh;
+    width: 90%;
+}
+
+#filter-dropdown .dropdown-menu{
+    border: none;
+    box-shadow: none;
+    padding: 0px;
+}

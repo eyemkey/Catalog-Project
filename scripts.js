@@ -13,6 +13,13 @@ const editSubmitEditBtn = editPopupContent.querySelector('#submitEdit');
 
 let filteredCardsArr = [...titles];
 
+const searchBox = document.getElementById("searchBox");
+let searchBoxValue = searchBox.value;
+
+searchBox.addEventListener('input', () => {
+    searchBoxValue = searchBox.value;
+    filter();
+})
 
 
 morePopupClose.addEventListener('click', () => {
@@ -270,15 +277,23 @@ function filter(){
         let containsGenres = contains(activeGenres, title.genres);
         let containsPlatforms = contains(activePlatforms, title.platforms);
         let containsDeveloper = contains(activeDevelopers, [title.developer]);
+        let inSearch = searchBoxValue == "" ? true : isInSearch(title.title);
         let inPriceRange = noPriceBound || (title.price >= minPrice && title.price <= maxPrice);
         let inMetacriticScoreRange = noMetacriticScoreBound || (title.metacriticScore >= minMetacriticScore && title.metacriticScore <= maxMetacriticScore);
-        if(containsGenres && containsPlatforms && containsDeveloper && inPriceRange && inMetacriticScoreRange){
+        if(containsGenres && containsPlatforms && containsDeveloper && inPriceRange && inMetacriticScoreRange && inSearch){
                 filteredCardsArr.push(title);
         }
     }
     callSort();
     showCards();
 }
+
+function isInSearch(title){
+    const lowerCaseTitle = title.toLowerCase(); 
+    const lowercaseSearchBoxValue = searchBoxValue.toLowerCase();
+    return lowerCaseTitle.includes(lowercaseSearchBoxValue);
+}
+
 
 function contains(searchArray, targetsArr){
     if(searchArray.length == 0) return true;

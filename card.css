@@ -1,0 +1,52 @@
+
+#card-container {
+    display: grid;
+    width: inherit;
+    
+    grid-template-columns: repeat(4, 1fr);
+    /* margin: 20px; */
+}
+
+.card {
+    padding: 1.5vw;
+    margin: 0.5vw;
+    width: 15vw;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+.card-content {
+    font-family: "Verdana";
+    color: black;
+}
+
+.card-content h2{
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    /* margin-top: 0; */
+    font-size: 1.2em;
+}
+
+.card-content p{
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 5px;
+    height: auto;
+}
+
+
+.card button {
+    width: 100%;
+    background-color: #055C9D;
+}
