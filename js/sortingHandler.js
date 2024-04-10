@@ -1,4 +1,7 @@
 
+/**
+ * Invokes the appropriate sort function based on the current Sorting Type
+ */
 function callSort(){
 
     if(currSortingType == "title-A-Z"){
@@ -20,10 +23,15 @@ function callSort(){
     } //Todo
 }
 
+
+/**
+ * Sorts the filteredCardsArr 
+ * @param {*} sortBy - the object field to be sorted by
+ * @param {*} lowestFirst - boolean value to know whether to sort in ascending or descending order
+ */
 function sort(sortBy, lowestFirst){
-    console.log(filteredCardsArr);
     for(let i = 0; i < filteredCardsArr.length; i++){
-        let extreme = i; //The index of either min or max element in titles that comes after i
+        let extreme = i; //The index of either min or max element in gameObjects that comes after i
         for(let j = i + 1; j < filteredCardsArr.length; j++){
             if(lowestFirst){
                 if(filteredCardsArr[extreme][sortBy] > filteredCardsArr[j][sortBy]) extreme = j;
@@ -33,10 +41,15 @@ function sort(sortBy, lowestFirst){
         }
         swapInFilteredCardsArr(i, extreme);
     }
-    console.log(filteredCardsArr);
     showCards();
 }
 
+
+/**
+ * Swaps the elements in index1 and index2 in filteredCardsArr
+ * @param {*} index1 
+ * @param {*} index2 
+ */
 function swapInFilteredCardsArr(index1, index2){
     let temp = filteredCardsArr[index1];
     filteredCardsArr[index1] = filteredCardsArr[index2];

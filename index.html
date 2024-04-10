@@ -4,14 +4,17 @@
     <head>
         <title>Arman's Favourite Games | Home</title>
         <meta name="description" content="A Catalog of  Arman's Favourite Games">
-        <link rel="stylesheet" href="dropdown.css" />
-        <link rel="stylesheet" href="popup.css" />
-        <link rel="stylesheet" href="card.css" />
-        <link rel="stylesheet" href="style.css" />
-        <script type="text/javascript" src="titles.js" defer></script>
-        <script type="text/javascript" src="scripts.js" defer></script>
-        <script type="text/javascript" src="sortingHandler.js" defer></script>
-        <script type="text/javascript" src="dropdownHandler.js" defer></script>
+        <link rel="stylesheet" href="css/card.css" />
+        <link rel="stylesheet" href="css/dropdown.css" />
+        <link rel="stylesheet" href="css/popup.css" />
+        <link rel="stylesheet" href="css/style.css" />
+
+
+        <script type="text/javascript" src="js/gameObjects.js" defer></script>
+        <script type="text/javascript" src="js/popup.js" defer></script>
+        <script type="text/javascript" src="js/scripts.js" defer></script>
+        <script type="text/javascript" src="js/sortingHandler.js" defer></script>
+        <script type="text/javascript" src="js/dropdownHandler.js" defer></script>
     </head>
     
     <body>
@@ -30,8 +33,13 @@
             <button onclick="removeSelectedCards()">
                 Remove Selected Cards
             </button>   
-
+            
+            
             <input type="text" id="searchBox" placeholder="Search">
+
+            <button id="clear" onclick="clearFilters()">
+                Clear Filters
+            </button>
         </div>
 
 
@@ -53,8 +61,8 @@
                         <label><input type="radio" name="sort-option" value="title-Z-A">Z-A</label>
                         <label><input type="radio" name="sort-option" value="price-asc">Price Low-High</label>
                         <label><input type="radio" name="sort-option" value="price-desc">Price High-Low</label>
-                        <label><input type="radio" name="sort-option" value="metacriticScore-desc">Metacritic Score Low-High</label>
-                        <label><input type="radio" name="sort-option" value="metacriticScore-asc">Metacritic Score High-Low</label>
+                        <label><input type="radio" name="sort-option" value="metacriticScore-asc">Metacritic Score Low-High</label>
+                        <label><input type="radio" name="sort-option" value="metacriticScore-desc">Metacritic Score High-Low</label>
                         <label><input type="radio" name="sort-option" value="releaseDate-asc">Oldest First</label>
                         <label><input type="radio" name="sort-option" value="releaseDate-desc">Newest First</label>
                     </div>
@@ -90,13 +98,6 @@
                         </div>
                     </div>
 
-                    <div id="developer-dropdown" class="dropdown">
-                        <button class="dropdown-toggle">Developers</button>
-                        <div class="dropdown-menu">
-
-                        </div>
-                    </div>
-                    
                     <div id="metacritic-dropdown" class="dropdown">
                         <button class="dropdown-toggle">Metacritic Score</button>
                         <div class="dropdown-menu">
@@ -110,6 +111,15 @@
                             </table>
                         </div>
                     </div>
+
+                    <div id="developer-dropdown" class="dropdown">
+                        <button class="dropdown-toggle">Developers</button>
+                        <div class="dropdown-menu">
+
+                        </div>
+                    </div>
+                    
+                    
                 
             </div>
             

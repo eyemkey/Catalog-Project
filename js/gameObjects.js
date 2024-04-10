@@ -1,4 +1,4 @@
-let titles = [
+let gameObjects = [
     {title: "God of War", price: 19.99, platforms: ["PS4", "PC"], metacriticScore: 94, genres: ["Action"], publisher: "Sony Interactive Entertainment", developer: "SCE Santa Monica", releaseDate: new Date("2018-04-20"), imagePath: "./images/god-of-war.jpg"},
     {title: "Marvel's Spider-Man Remastered", price: 49.99, platforms: ["PS5","PS4", "PC"], metacriticScore: 87, genres: ["Action"], publisher: "Playstation PC", developer: "Nixxes Software", releaseDate: new Date("2022-08-12"), imagePath: "./images/spider-man.jpg" },
     {title: "Uncharted 4: A Thief's End", price: 19.99, platforms: ["PS4", "PC"], metacriticScore: 93, genres: ["Action"], publisher: "Sony Interactive Entertainment", developer: "Naughty Dog", releaseDate: new Date("2016-05-10"), imagePath: "./images/uncharted-4.jpg" },
@@ -45,18 +45,22 @@ let titles = [
 
 
 
-function removeFromTitles(cards){
+/**
+ * Function removing cards from the gameObjects array
+ * @param {*} cards - The array of cards to be removed
+ */
+function removeFromGameObjects(cards){
     let k = 0; 
     let tempTitles = [];
-    for(let i = 0; i < titles.length; i++){
-        if(titles[i] != cards[k]){
-            tempTitles.push(titles[i]);
+    for(let i = 0; i < gameObjects.length; i++){
+        if(gameObjects[i] != cards[k]){
+            tempTitles.push(gameObjects[i]);
         }else{
             k++;
         }
     }
 
-    titles = tempTitles;
+    gameObjects = tempTitles;
 }
 
 
