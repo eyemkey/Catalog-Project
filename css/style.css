@@ -16,7 +16,6 @@ body {
 }
 
 
-
 #top-buttons button {
     background-color: #e3c632;
 }
@@ -28,7 +27,7 @@ body {
 
 .title {
     text-align: center;
-    margin: 0.5vh;
+    margin: 2vh 0 3vh 0;
     font-size: 3em;
     font-family: "Helvetica";
     font-weight: lighter;
